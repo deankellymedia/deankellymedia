@@ -1,12 +1,17 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
-  <!-- Dark Circular Background -->
-  <circle cx="50" cy="50" r="50" fill="#0b0c10" />
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100%" height="100%">
+  <!-- Dark Background Plate for High Visibility in Light/Dark Browser Tabs -->
+  <rect width="100" height="100" rx="20" fill="#0b0c10"/>
   
-  <!-- Outer Aperture / Focus Ring Accent -->
-  <circle cx="50" cy="50" r="42" fill="none" stroke="#00e5ff" stroke-width="4" stroke-dasharray="180 30" />
+  <!-- Outer Hexagonal Prism Frame -->
+  <polygon points="50,12 85,31 85,69 50,88 15,69 15,31" stroke="rgba(255,255,255,0.35)" stroke-width="3" fill="none"/>
   
-  <!-- Stylized "DK" Text -->
-  <text x="50%" y="58%" font-family="Arial, sans-serif" font-weight="900" font-size="38" fill="#ffffff" text-anchor="middle" dominant-baseline="middle" letter-spacing="-2">
-    D<tspan fill="#00e5ff">K</tspan>
-  </text>
+  <!-- Outer Light Flare Triangle -->
+  <path d="M 50 15 L 82 67 L 18 67 Z" stroke="#ffffff" stroke-width="5" stroke-linejoin="round" fill="none"/>
+  
+  <!-- Anamorphic Electric Cyan Flare Beam -->
+  <path d="M 10 50 L 90 50" stroke="#00e5ff" stroke-width="6" stroke-linecap="round"/>
+  
+  <!-- Core Flare Center -->
+  <circle cx="50" cy="50" r="7" fill="#00e5ff"/>
+  <circle cx="50" cy="50" r="3" fill="#ffffff"/>
 </svg>

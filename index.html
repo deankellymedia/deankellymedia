@@ -1,518 +1,717 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" type="image/svg+xml" href="favicon.svg">
-    <title>Dean Kelly | Videographer & Photographer</title>
-    <style>
-        /* CSS RESET & VARIABLES */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dean Kelly | Director & Visual Artist</title>
+  
+  <!-- Favicon Integration -->
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  
+  <style>
+    /* ==================================================
+       GLOBAL STYLES & RESET
+    ================================================== */
+    :root {
+      --bg-color: #0b0c10;
+      --card-bg: #1f2833;
+      --text-main: #c5c6c7;
+      --text-bright: #ffffff;
+      --accent-cyan: #00e5ff;
+      --font-mono: 'Courier New', Courier, monospace;
+      --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    }
 
-        :root {
-            --bg-color: #0b0c10;
-            --card-bg: #13141a;
-            --accent-color: #00e5ff; /* Electric Cyan Accent */
-            --text-main: #f0f2f5;
-            --text-muted: #8c92a0;
-            --border-color: #20232d;
-            --nav-height: 70px;
-        }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
 
-        html {
-            scroll-behavior: smooth;
-        }
+    body {
+      background-color: var(--bg-color);
+      color: var(--text-main);
+      font-family: var(--font-sans);
+      line-height: 1.6;
+      padding-bottom: 80px;
+    }
 
-        body {
-            background-color: var(--bg-color);
-            color: var(--text-main);
-            line-height: 1.6;
-            overflow-x: hidden;
-        }
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
 
-        /* NAVIGATION */
-        nav {
-            position: fixed;
-            top: 0;
-            width: 100%;
-            height: var(--nav-height);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 0 5%;
-            background: rgba(11, 12, 16, 0.95);
-            backdrop-filter: blur(12px);
-            z-index: 1000;
-            border-bottom: 1px solid var(--border-color);
-        }
+    /* ==================================================
+       NAVIGATION HEADER
+    ================================================== */
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.5rem 5%;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      background-color: rgba(11, 12, 16, 0.95);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      backdrop-filter: blur(8px);
+    }
 
-        .logo {
-            font-size: 1.25rem;
-            font-weight: 800;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            color: var(--text-main);
-            z-index: 1001;
-        }
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
 
-        .logo span {
-            color: var(--accent-color);
-        }
+    .brand-logo-svg {
+      width: 32px;
+      height: 32px;
+    }
 
-        .nav-links {
-            display: flex;
-            list-style: none;
-            gap: 30px;
-        }
+    .brand-title {
+      font-weight: 700;
+      letter-spacing: 2px;
+      color: var(--text-bright);
+      font-size: 1.1rem;
+    }
 
-        .nav-links a {
-            color: var(--text-muted);
-            text-decoration: none;
-            font-size: 0.85rem;
-            text-transform: uppercase;
-            letter-spacing: 1.5px;
-            transition: color 0.3s;
-        }
+    nav ul {
+      display: flex;
+      list-style: none;
+      gap: 2rem;
+      font-family: var(--font-mono);
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
 
-        .nav-links a:hover {
-            color: var(--accent-color);
-        }
+    nav a:hover {
+      color: var(--accent-cyan);
+      transition: color 0.2s ease;
+    }
 
-        /* MOBILE MENU TOGGLE BUTTON */
-        .menu-toggle {
-            display: none;
-            flex-direction: column;
-            justify-content: space-around;
-            width: 30px;
-            height: 24px;
-            background: transparent;
-            border: none;
-            cursor: pointer;
-            z-index: 1001;
-        }
+    /* ==================================================
+       LAYOUT CONTAINERS & SECTION HEADERS
+    ================================================== */
+    .container {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 5%;
+    }
 
-        .menu-toggle span {
-            width: 100%;
-            height: 2px;
-            background-color: var(--text-main);
-            transition: all 0.3s ease;
-        }
+    .section-header {
+      margin: 4rem 0 1.5rem 0;
+      font-family: var(--font-mono);
+      font-size: 0.85rem;
+      color: var(--accent-cyan);
+      letter-spacing: 2px;
+    }
 
-        /* HERO / SHOWREEL SECTION */
-        .hero {
-            min-height: 100vh;
-            padding-top: calc(var(--nav-height) + 30px);
-            padding-bottom: 60px;
-            padding-left: 5%;
-            padding-right: 5%;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            background: radial-gradient(circle at top, #181a24 0%, #0b0c10 100%);
-        }
+    /* ==================================================
+       SECTION 1: HERO WIDESCREEN FEATURE (2.39:1)
+    ================================================== */
+    .hero-section {
+      margin-top: 2rem;
+    }
 
-        .hero h1 {
-            font-size: clamp(2.2rem, 6vw, 4rem);
-            font-weight: 800;
-            letter-spacing: -0.5px;
-            margin-bottom: 12px;
-            color: var(--text-main);
-        }
+    .hero-viewport {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 2.39 / 1;
+      background-color: #000;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      overflow: hidden;
+      border-radius: 4px;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.8);
+    }
 
-        .hero p {
-            color: var(--text-muted);
-            font-size: clamp(0.95rem, 2.5vw, 1.1rem);
-            margin-bottom: 30px;
-            max-width: 600px;
-        }
+    .hero-viewport iframe {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 100%;
+      height: 100%;
+      transform: translate(-50%, -50%) scale(1.35);
+      pointer-events: none;
+    }
 
-        .showreel-container {
-            width: 100%;
-            max-width: 950px;
-            aspect-ratio: 16 / 9;
-            background-color: var(--card-bg);
-            border: 1px solid var(--border-color);
-            border-radius: 12px;
-            overflow: hidden;
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7);
-        }
+    /* Viewfinder HUD Overlay */
+    .viewfinder-hud {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 10;
+      pointer-events: none;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      color: rgba(255, 255, 255, 0.75);
+      letter-spacing: 1.5px;
+    }
 
-        .showreel-container iframe {
-            width: 100%;
-            height: 100%;
-            border: none;
-        }
+    .hud-top-left, .hud-top-right, .hud-bottom-left, .hud-bottom-right {
+      position: absolute;
+      background: rgba(0, 0, 0, 0.4);
+      padding: 4px 8px;
+      border-radius: 2px;
+      backdrop-filter: blur(2px);
+    }
 
-        /* PORTFOLIO SECTION */
-        .section {
-            padding: 80px 5%;
-        }
+    .hud-top-left { top: 15px; left: 15px; display: flex; align-items: center; gap: 8px; }
+    .hud-top-right { top: 15px; right: 15px; }
+    .hud-bottom-left { bottom: 15px; left: 15px; }
+    .hud-bottom-right { bottom: 15px; right: 15px; }
 
-        .section-title {
-            font-size: clamp(1.4rem, 4vw, 1.8rem);
-            margin-bottom: 30px;
-            letter-spacing: 1px;
-            position: relative;
-            display: inline-block;
-            text-transform: uppercase;
-        }
+    .rec-dot {
+      width: 8px;
+      height: 8px;
+      background-color: #ff3b30;
+      border-radius: 50%;
+      display: inline-block;
+      animation: blink 1.2s infinite;
+    }
 
-        .section-title::after {
-            content: '';
-            position: absolute;
-            bottom: -8px;
-            left: 0;
-            width: 40px;
-            height: 3px;
-            background-color: var(--accent-color);
-        }
+    @keyframes blink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.2; }
+    }
 
-        /* GRID LAYOUT FOR WORK */
-        .work-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 20px;
-        }
+    /* ==================================================
+       DIRECTORIAL STATEMENT BLOCK
+    ================================================== */
+    .hero-statement {
+      margin: 3.5rem 0 2rem 0;
+      max-width: 900px;
+    }
 
-        .work-card {
-            background-color: var(--card-bg);
-            border-radius: 8px;
-            overflow: hidden;
-            border: 1px solid var(--border-color);
-            transition: transform 0.3s, border-color 0.3s;
-        }
+    .hero-statement h1 {
+      font-size: clamp(2rem, 4vw, 3.2rem);
+      font-weight: 800;
+      color: var(--text-bright);
+      line-height: 1.1;
+      letter-spacing: -0.5px;
+      text-transform: uppercase;
+      margin-bottom: 1rem;
+    }
 
-        .work-card:hover {
-            transform: translateY(-5px);
-            border-color: var(--accent-color);
-        }
+    .hero-statement p {
+      font-size: clamp(1.05rem, 1.8vw, 1.35rem);
+      color: var(--text-main);
+      font-weight: 300;
+      line-height: 1.5;
+    }
 
-        .card-media {
-            width: 100%;
-            height: 220px;
-            object-fit: cover;
-            background-color: #1a1c23;
-            border: none;
-        }
+    /* ==================================================
+       FEATURED VIDEO GRID
+    ================================================== */
+    .video-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 2rem;
+    }
 
-        .card-info {
-            padding: 20px;
-        }
+    .video-card {
+      background-color: var(--card-bg);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      border-radius: 4px;
+      overflow: hidden;
+      transition: transform 0.3s ease, border-color 0.3s ease;
+      display: flex;
+      flex-direction: column;
+    }
 
-        .card-tag {
-            color: var(--accent-color);
-            font-size: 0.75rem;
-            text-transform: uppercase;
-            letter-spacing: 1.5px;
-            font-weight: 600;
-        }
+    .video-card:hover {
+      transform: translateY(-5px);
+      border-color: var(--accent-cyan);
+    }
 
-        .card-title {
-            font-size: 1.15rem;
-            margin: 6px 0 10px;
-        }
+    .video-thumb-wrapper {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      overflow: hidden;
+      background-color: #000;
+    }
 
-        .card-desc {
-            color: var(--text-muted);
-            font-size: 0.88rem;
-        }
+    .video-thumb {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0.85;
+      transition: opacity 0.3s ease, transform 0.3s ease;
+    }
 
-        /* ABOUT SECTION */
-        .about-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 40px;
-            align-items: start;
-        }
+    .video-card:hover .video-thumb {
+      opacity: 1;
+      transform: scale(1.03);
+    }
 
-        .gear-list {
-            list-style: none;
-            margin-top: 15px;
-        }
+    .play-badge {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 48px;
+      height: 48px;
+      background: rgba(11, 12, 16, 0.8);
+      border: 1px solid var(--accent-cyan);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background-color 0.3s ease;
+    }
 
-        .gear-list li {
-            color: var(--text-muted);
-            margin-bottom: 10px;
-            padding-left: 20px;
-            position: relative;
-            font-size: 0.95rem;
-        }
+    .play-badge::after {
+      content: '';
+      display: block;
+      width: 0;
+      height: 0;
+      border-style: solid;
+      border-width: 6px 0 6px 10px;
+      border-color: transparent transparent transparent var(--accent-cyan);
+      margin-left: 2px;
+    }
 
-        .gear-list li::before {
-            content: "•";
-            position: absolute;
-            left: 0;
-            color: var(--accent-color);
-            font-size: 1.2rem;
-            line-height: 1;
-        }
+    .video-info {
+      padding: 1.2rem;
+    }
 
-        /* CONTACT FORM */
-        .contact-form {
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-            max-width: 600px;
-        }
+    .video-tags {
+      display: flex;
+      justify-content: space-between;
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      color: var(--accent-cyan);
+      margin-bottom: 0.4rem;
+    }
 
-        .contact-form input, 
-        .contact-form textarea {
-            width: 100%;
-            padding: 16px;
-            background-color: var(--card-bg);
-            border: 1px solid var(--border-color);
-            border-radius: 6px;
-            color: var(--text-main);
-            font-size: 1rem;
-        }
+    .video-title {
+      font-size: 1.25rem;
+      color: var(--text-bright);
+      font-weight: 600;
+    }
 
-        .contact-form input:focus, 
-        .contact-form textarea:focus {
-            outline: none;
-            border-color: var(--accent-color);
-        }
+    /* ==================================================
+       STILLS & PORTRAIT GALLERY
+    ================================================== */
+    .stills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+    }
 
-        .btn {
-            display: inline-block;
-            padding: 16px 32px;
-            background-color: var(--accent-color);
-            color: #0b0c10;
-            font-weight: 700;
-            border: none;
-            border-radius: 6px;
-            cursor: pointer;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            transition: opacity 0.3s;
-            text-decoration: none;
-            text-align: center;
-        }
+    .still-card {
+      position: relative;
+      aspect-ratio: 4 / 5;
+      background-color: var(--card-bg);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      border-radius: 4px;
+      overflow: hidden;
+    }
 
-        .btn:hover {
-            opacity: 0.85;
-        }
+    .still-card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0.9;
+      transition: transform 0.4s ease, opacity 0.4s ease;
+    }
 
-        /* FOOTER */
-        footer {
-            text-align: center;
-            padding: 30px 5%;
-            border-top: 1px solid var(--border-color);
-            color: var(--text-muted);
-            font-size: 0.85rem;
-        }
+    .still-card:hover img {
+      opacity: 1;
+      transform: scale(1.05);
+    }
 
-        /* MOBILE MEDIA QUERIES (RESPONSIVE STYLES) */
-        @media screen and (max-width: 768px) {
-            .menu-toggle {
-                display: flex;
-            }
+    .still-overlay {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      padding: 1.2rem;
+      background: linear-gradient(0deg, rgba(11, 12, 16, 0.95) 0%, rgba(11, 12, 16, 0) 100%);
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+    }
 
-            .nav-links {
-                position: fixed;
-                top: 0;
-                right: -100%;
-                width: 80%;
-                max-width: 300px;
-                height: 100vh;
-                background-color: #0d0e14;
-                flex-direction: column;
-                justify-content: center;
-                align-items: center;
-                gap: 35px;
-                border-left: 1px solid var(--border-color);
-                transition: right 0.4s ease;
-                box-shadow: -10px 0 30px rgba(0,0,0,0.8);
-            }
+    .still-category {
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      color: var(--accent-cyan);
+      letter-spacing: 1px;
+    }
 
-            .nav-links.active {
-                right: 0;
-            }
+    .still-title {
+      font-size: 1.1rem;
+      color: var(--text-bright);
+      font-weight: 600;
+    }
 
-            .nav-links a {
-                font-size: 1rem;
-            }
+    /* ==================================================
+       ABOUT ME & FORMSPREE CONTACT SECTION
+    ================================================== */
+    .about-card {
+      background-color: var(--card-bg);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 4px;
+      padding: 2.5rem;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      align-items: start;
+    }
 
-            .section {
-                padding: 60px 5%;
-            }
-        }
-    </style>
+    .about-bio h3 {
+      font-size: 1.8rem;
+      color: var(--text-bright);
+      margin-bottom: 1rem;
+    }
+
+    .about-bio p {
+      color: var(--text-main);
+      font-size: 1.05rem;
+      line-height: 1.7;
+      margin-bottom: 1.5rem;
+    }
+
+    .about-specs {
+      border-left: 1px solid rgba(255, 255, 255, 0.1);
+      padding-left: 2rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+      font-family: var(--font-mono);
+      font-size: 0.85rem;
+      margin-bottom: 2rem;
+    }
+
+    .spec-group h5 {
+      color: var(--accent-cyan);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 0.4rem;
+    }
+
+    .spec-group p, .spec-group a {
+      color: var(--text-bright);
+    }
+
+    .spec-group a:hover {
+      color: var(--accent-cyan);
+    }
+
+    /* Formspree Contact Form Styling */
+    .contact-form-container h4 {
+      font-size: 1.2rem;
+      color: var(--text-bright);
+      margin-bottom: 1rem;
+      font-family: var(--font-mono);
+      letter-spacing: 1px;
+    }
+
+    .contact-form {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+    }
+
+    .form-group label {
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      color: var(--accent-cyan);
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+
+    .form-group input,
+    .form-group textarea {
+      background-color: var(--bg-color);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: 4px;
+      padding: 0.8rem 1rem;
+      color: var(--text-bright);
+      font-family: var(--font-sans);
+      font-size: 0.95rem;
+      transition: border-color 0.2s ease;
+    }
+
+    .form-group input:focus,
+    .form-group textarea:focus {
+      outline: none;
+      border-color: var(--accent-cyan);
+    }
+
+    .submit-btn {
+      background-color: transparent;
+      border: 1px solid var(--accent-cyan);
+      color: var(--accent-cyan);
+      padding: 0.8rem 1.5rem;
+      font-family: var(--font-mono);
+      font-size: 0.85rem;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      cursor: pointer;
+      border-radius: 4px;
+      transition: background-color 0.2s ease, color 0.2s ease;
+      margin-top: 0.5rem;
+    }
+
+    .submit-btn:hover {
+      background-color: var(--accent-cyan);
+      color: var(--bg-color);
+      font-weight: 700;
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 900px) {
+      .about-card {
+        grid-template-columns: 1fr;
+        gap: 2.5rem;
+        padding: 1.5rem;
+      }
+      .about-specs {
+        border-left: none;
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+        padding-left: 0;
+        padding-top: 1.5rem;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .hero-viewport {
+        aspect-ratio: 16 / 9;
+      }
+      .viewfinder-hud {
+        font-size: 0.65rem;
+      }
+    }
+  </style>
 </head>
 <body>
 
-    <!-- NAV -->
+  <!-- ==================================================
+       HEADER / NAVIGATION
+  ================================================== -->
+  <header>
+    <a href="#" class="brand">
+      <!-- Anamorphic Prism Logo -->
+      <svg class="brand-logo-svg" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <polygon points="50,15 82,33 82,67 50,85 18,67 18,33" stroke="rgba(255,255,255,0.25)" stroke-width="2" />
+        <path d="M 18 50 L 82 50" stroke="#00e5ff" stroke-width="3.5" stroke-linecap="round"/>
+        <path d="M 50 15 L 82 67 L 18 67 Z" stroke="#ffffff" stroke-width="3.5" stroke-linejoin="round" fill="none"/>
+        <circle cx="50" cy="50" r="5" fill="#00e5ff" />
+      </svg>
+      <span class="brand-title">DEAN KELLY</span>
+    </a>
+
     <nav>
-        <div class="logo">Dean Kelly<span>.</span></div>
-        
-        <button class="menu-toggle" id="mobile-menu" aria-label="Toggle Navigation">
-            <span></span>
-            <span></span>
-            <span></span>
-        </button>
-
-        <ul class="nav-links" id="nav-list">
-            <li><a href="#showreel">Showreel</a></li>
-            <li><a href="#video">Video</a></li>
-            <li><a href="#photo">Photography</a></li>
-            <li><a href="#about">About</a></li>
-            <li><a href="#contact">Contact</a></li>
-        </ul>
+      <ul>
+        <li><a href="#films">Films</a></li>
+        <li><a href="#stills">Stills</a></li>
+        <li><a href="#about">About</a></li>
+      </ul>
     </nav>
+  </header>
 
-    <!-- HERO / SHOWREEL -->
-    <section class="hero" id="showreel">
-        <h1>DEAN KELLY</h1>
-        <p>Videographer & Photographer crafting visual stories, commercial content, and digital media.</p>
+  <main class="container">
+
+    <!-- ==================================================
+         SECTION 1: HERO WIDESCREEN FEATURE (2.39:1)
+    ================================================== -->
+    <section class="hero-section">
+      <div class="hero-viewport">
         
-        <div class="showreel-container">
-            <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" title="Dean Kelly Showreel" allowfullscreen></iframe>
+        <!-- Dynamic Viewfinder HUD Overlay -->
+        <div class="viewfinder-hud">
+          <div class="hud-top-left">
+            <span class="rec-dot"></span>REC // LATEST RELEASE
+          </div>
+          <div class="hud-top-right">GET 'EM [2026]</div>
+          <div class="hud-bottom-left">ISO 800 | 24 FPS</div>
+          <div class="hud-bottom-right">2.39:1 ANAMORPHIC</div>
         </div>
+
+        <!-- Featured Widescreen Video Loop -->
+        <iframe 
+          src="https://www.youtube.com/embed/VibBP5boDm4?autoplay=1&mute=1&loop=1&playlist=VibBP5boDm4&controls=0&showinfo=0&rel=0&modestbranding=1" 
+          title="Get 'Em Featured Cut" 
+          frameborder="0" 
+          allow="autoplay; encrypted-media" 
+          allowfullscreen>
+        </iframe>
+
+      </div>
+
+      <!-- Directorial Statement Headline -->
+      <div class="hero-statement">
+        <h1>CINEMATOGRAPHY & VISUAL DIRECTION</h1>
+        <p>Crafting high-contrast visual narratives across commercial films, automotive visuals, and creative music projects.</p>
+      </div>
     </section>
 
-    <!-- VIDEO WORK SECTION -->
-    <section class="section" id="video">
-        <h2 class="section-title">Featured Video Work</h2>
-        <div class="work-grid">
-            
-            <div class="work-card">
-                <iframe referrerpolicy="strict-origin-when-cross-origin" class="card-media" src="https://www.youtube.com/embed/oisGEmk1NdY?si=SPBJim64Otoz2FWP" allowfullscreen></iframe>
-                <div class="card-info">
-                    <span class="card-tag">Documentary</span>
-                    <h3 class="card-title">Dublin on Drugs</h3>
-                    <p class="card-desc">Director of Photography & Sound Designer</p>
-                </div>
-            </div>
-
-            <div class="work-card">
-                <iframe referrerpolicy="strict-origin-when-cross-origin" class="card-media" src="https://www.youtube.com/embed/VibBP5boDm4?si=pZ0WjyUjGXNNQF5c" allowfullscreen></iframe>
-                <div class="card-info">
-                    <span class="card-tag">Short Film</span>
-                    <h3 class="card-title">Get'em</h3>
-                    <p class="card-desc">Director of Photography</p>
-                </div>
-            </div>
-
-            <div class="work-card">
-                <iframe class="card-media" src="https://www.youtube.com/embed/Frikb4dNiHI?si=Ko8tqkLxtP74LI5b" allowfullscreen></iframe>
-                <div class="card-info">
-                    <span class="card-tag">Documentary</span>
-                    <h3 class="card-title">One Punch at a Time</h3>
-                    <p class="card-desc">Director of Photography</p>
-                </div>
-            </div>
-
-        </div>
-    </section>
-
-    <!-- PHOTOGRAPHY SECTION ON MAIN INDEX PAGE -->
-<section class="section" id="photo" style="background-color: #07080a;">
-    <h2 class="section-title">Photography</h2>
-    <div class="work-grid">
-        
-        <!-- CARD 1: PORTRAITS -->
-        <a href="portraits.html" style="text-decoration: none; color: inherit;">
-            <div class="work-card">
-                <img class="card-media" src="https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?auto=format&fit=crop&w=800&q=80" alt="Portrait Work">
-                <div class="card-info">
-                    <span class="card-tag">Editorial</span>
-                    <h3 class="card-title">Studio Portraits &rarr;</h3>
-                    <p class="card-desc">High-contrast lighting portraits for editorial print. Click to view gallery.</p>
-                </div>
-            </div>
-        </a>
-
-        <!-- CARD 2: URBAN -->
-        <a href="urban.html" style="text-decoration: none; color: inherit;">
-            <div class="work-card">
-                <img class="card-media" src="https://images.unsplash.com/photo-1492691527719-9d1e07e534b4?auto=format&fit=crop&w=800&q=80" alt="Landscape Work">
-                <div class="card-info">
-                    <span class="card-tag">Urban / Architecture</span>
-                    <h3 class="card-title">Cinematic Series &rarr;</h3>
-                    <p class="card-desc">Atmospheric street and architectural photography. Click to view gallery.</p>
-                </div>
-            </div>
-        </a>
-
-                <!-- CARD 3: AUTOMOTIVE PHOTOGRAPHY -->
-        <a href="automotive.html" style="text-decoration: none; color: inherit;">
-            <div class="work-card">
-                <img class="card-media" src="https://images.unsplash.com/photo-1617814076367-b759c7d7e738?auto=format&fit=crop&w=800&q=80" alt="Automotive Work">
-                <div class="card-info">
-                    <span class="card-tag">Automotive</span>
-                    <h3 class="card-title">Commercial & Motorsport &rarr;</h3>
-                    <p class="card-desc">High-speed rolling shots, static studio lighting, and supercar details. Click to view gallery.</p>
-                </div>
-            </div>
-        </a>
-
+    <!-- ==================================================
+         SECTION 2: SELECTED DIRECTORIAL WORK
+    ================================================== -->
+    <div class="section-header" id="films">
+      <span class="section-title">// SELECTED DIRECTORIAL WORK</span>
     </div>
-</section>
 
-    <!-- ABOUT & KIT SECTION -->
-    <section class="section" id="about">
-        <h2 class="section-title">About Dean</h2>
-        <div class="about-container">
-            <div>
-                <p>I am a multidisciplinary visual creator with experience across video production, cinematography, and photography. I help brands, artists, and agencies bring high-end visual stories to life.</p>
-                <p style="margin-top: 15px;">Whether operating as a solo camera operator or managing full production workflows, my focus is on creative lighting, clean composition, and crisp editing.</p>
-            </div>
-            
-            <div>
-                <h3 style="font-size: 1.1rem;">Camera & Production Kit</h3>
-                <ul class="gear-list">
-                    <li><strong>Cameras:</strong> Cinema & Mirrorless setups</li>
-                    <li><strong>Lenses:</strong> Prime & Zoom low-light glass</li>
-                    <li><strong>Lighting:</strong> Continuous LED setups & softboxes</li>
-                    <li><strong>Audio:</strong> Wireless lavaliers & Shotgun microphones</li>
-                    <li><strong>Software:</strong> DaVinci Resolve, Premiere Pro, Lightroom</li>
-                </ul>
-            </div>
+    <section class="video-grid">
+      
+      <!-- Film Project 1: Dublin on Drugs -->
+      <a href="https://youtu.be/oisGEmk1NdY" target="_blank" rel="noopener noreferrer" class="video-card">
+        <div class="video-thumb-wrapper">
+          <img src="https://img.youtube.com/vi/oisGEmk1NdY/hqdefault.jpg" alt="Dublin on Drugs" class="video-thumb">
+          <div class="play-badge"></div>
         </div>
+        <div class="video-info">
+          <div class="video-tags">
+            <span>DOCUMENTARY // DIR</span>
+            <span>[RAW LOG]</span>
+          </div>
+          <h3 class="video-title">Dublin on Drugs</h3>
+        </div>
+      </a>
+
+      <!-- Film Project 2: Get 'Em -->
+      <a href="https://youtu.be/VibBP5boDm4" target="_blank" rel="noopener noreferrer" class="video-card">
+        <div class="video-thumb-wrapper">
+          <img src="https://img.youtube.com/vi/VibBP5boDm4/hqdefault.jpg" alt="Get'em - A Student Short Film" class="video-thumb">
+          <div class="play-badge"></div>
+        </div>
+        <div class="video-info">
+          <div class="video-tags">
+            <span>SHORT FILM</span>
+            <span>[05:12]</span>
+          </div>
+          <h3 class="video-title">Get 'Em</h3>
+        </div>
+      </a>
+
+      <!-- Film Project 3: One Punch at a Time -->
+      <a href="https://youtu.be/Frikb4dNiHI" target="_blank" rel="noopener noreferrer" class="video-card">
+        <div class="video-thumb-wrapper">
+          <img src="https://img.youtube.com/vi/Frikb4dNiHI/hqdefault.jpg" alt="One Punch at a Time - A Student Documentary" class="video-thumb">
+          <div class="play-badge"></div>
+        </div>
+        <div class="video-info">
+          <div class="video-tags">
+            <span>DOCUMENTARY</span>
+            <span>[06:45]</span>
+          </div>
+          <h3 class="video-title">One Punch at a Time</h3>
+        </div>
+      </a>
+
     </section>
 
-    <!-- CONTACT SECTION -->
-    <section class="section" id="contact" style="background-color: #07080a;">
-        <h2 class="section-title">Get In Touch</h2>
-        <p style="margin-bottom: 30px; color: var(--text-muted);">Available for freelance projects, commercial shoots, and creative direction.</p>
-        
-        <!-- Replace YOUR_UNIQUE_FORM_ID with your actual Formspree endpoint -->
-        <form class="contact-form" action="https://formspree.io/f/xzdnkryk" method="POST">
-            <input type="text" name="name" placeholder="Your Name" required>
-            <input type="email" name="email" placeholder="Your Email" required>
-            <textarea name="message" rows="6" placeholder="Tell me about your project..." required></textarea>
-            <button type="submit" class="btn">Send Message</button>
+    <!-- ==================================================
+         SECTION 3: ARCHIVE STILLS & PORTRAITS
+    ================================================== -->
+    <div class="section-header" id="stills">
+      <span class="section-title">// ARCHIVE STILLS & PORTRAITURE</span>
+    </div>
+
+    <section class="stills-grid">
+      
+      <!-- Portrait Photography Card 1 -->
+      <a href="portraits.html" class="still-card">
+        <img src="images/portraitsimg.jpg" alt="Cinematic Portraiture">
+        <div class="still-overlay">
+          <span class="still-category">STILLS // PORTRAITS</span>
+          <h4 class="still-title">Editorial Portraiture</h4>
+        </div>
+      </a>
+
+      <!-- Urban Photography Card 2 -->
+      <a href="urban.html" class="still-card">
+        <img src="images/urbanimg.jpeg" alt="Urban & Architecture">
+        <div class="still-overlay">
+          <span class="still-category">STILLS // ARCHITECTURE</span>
+          <h4 class="still-title">Urban Environments</h4>
+        </div>
+      </a>
+
+      <!-- Automotive Photography Card 3 -->
+      <a href="automotive.html" class="still-card">
+        <img src="images/autoimg.jpeg" alt="Automotive Photography">
+        <div class="still-overlay">
+          <span class="still-category">STILLS // AUTOMOTIVE</span>
+          <h4 class="still-title">High-Contrast Motion</h4>
+        </div>
+      </a>
+
+    </section>
+
+    <!-- ==================================================
+         SECTION 4: ABOUT ME & CONTACT (FORMSPREE INTEGRATION)
+    ================================================== -->
+    <div class="section-header" id="about">
+      <span class="section-title">// ABOUT // DIRECTOR PROFILE</span>
+    </div>
+
+    <section class="about-card">
+      
+      <!-- Bio & Specs Column -->
+      <div class="about-bio-col">
+        <div class="about-bio">
+          <h3>Dean Kelly</h3>
+          <p>
+            I am a Director and Visual Artist specialized in high-contrast cinematic storytelling, documentary filmmaking, and narrative short films. My work spans character-driven stories, raw urban commentary, and fast-paced editorial visuals.
+          </p>
+        </div>
+
+        <div class="about-specs">
+          <div class="spec-group">
+            <h5>Core Disciplines</h5>
+            <p>Directing, Cinematography, Color Grading, Editorial</p>
+          </div>
+          <div class="spec-group">
+            <h5>Direct Inquiries</h5>
+            <p><a href="mailto:deankellymedia@gmail.com">deankellymedia@gmail.com</a></p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Formspree Contact Form Column -->
+      <div class="contact-form-container">
+        <h4>// TRANSMIT MESSAGE</h4>
+        <form action="https://formspree.io/f/xzdnkryk" method="POST" class="contact-form">
+          
+          <div class="form-group">
+            <label for="name">Name / Production Co.</label>
+            <input type="text" id="name" name="name" required placeholder="Your Name">
+          </div>
+
+          <div class="form-group">
+            <label for="email">Email Address</label>
+            <input type="email" id="email" name="email" required placeholder="name@domain.com">
+          </div>
+
+          <div class="form-group">
+            <label for="message">Project Details / Message</label>
+            <textarea id="message" name="message" rows="4" required placeholder="Describe project scope, timeline, location..."></textarea>
+          </div>
+
+          <button type="submit" class="submit-btn">Send Transmission</button>
         </form>
+      </div>
+
     </section>
 
-    <!-- FOOTER -->
-    <footer>
-        <p>&copy; 2026 Dean Kelly. All rights reserved.</p>
-    </footer>
+  </main>
 
-    <!-- LIGHTWEIGHT JAVASCRIPT FOR MOBILE NAVIGATION -->
-    <script>
-        const menuToggle = document.getElementById('mobile-menu');
-        const navList = document.getElementById('nav-list');
-        const navLinks = document.querySelectorAll('.nav-links a');
-
-        // Toggle mobile menu open/close
-        menuToggle.addEventListener('click', () => {
-            navList.classList.toggle('active');
-        });
-
-        // Close menu automatically when clicking any section link
-        navLinks.forEach(link => {
-            link.addEventListener('click', () => {
-                navList.classList.remove('active');
-            });
-        });
-    </script>
 </body>
 </html>

@@ -1,235 +1,165 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Urban & Architecture Photography | Dean Kelly Media</title>
-    <link rel="icon" type="image/svg+xml" href="favicon.svg">
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Landscapes | Dean Kelly</title>
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  
+  <style>
+    :root {
+      --bg-color: #0b0c10;
+      --card-bg: #1f2833;
+      --text-main: #c5c6c7;
+      --text-bright: #ffffff;
+      --accent-cyan: #00e5ff;
+      --font-mono: 'Courier New', Courier, monospace;
+      --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    }
 
-        :root {
-            --bg-color: #0b0c10;
-            --card-bg: #13141a;
-            --accent-color: #00e5ff;
-            --text-main: #f0f2f5;
-            --text-muted: #8c92a0;
-            --border-color: #20232d;
-            --nav-height: 70px;
-        }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
 
-        body {
-            background-color: var(--bg-color);
-            color: var(--text-main);
-            line-height: 1.6;
-            padding-top: var(--nav-height);
-        }
+    body {
+      background-color: var(--bg-color);
+      color: var(--text-main);
+      font-family: var(--font-sans);
+      padding-bottom: 80px;
+    }
 
-        /* NAVIGATION BAR */
-        nav {
-            position: fixed;
-            top: 0;
-            width: 100%;
-            height: var(--nav-height);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 0 5%;
-            background: rgba(11, 12, 16, 0.95);
-            backdrop-filter: blur(12px);
-            z-index: 1000;
-            border-bottom: 1px solid var(--border-color);
-        }
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.5rem 5%;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      background-color: rgba(11, 12, 16, 0.95);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      backdrop-filter: blur(8px);
+    }
 
-        .logo {
-            font-size: 1.2rem;
-            font-weight: 800;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            color: var(--text-main);
-        }
+    .brand-title {
+      font-weight: 700;
+      letter-spacing: 2px;
+      color: var(--text-bright);
+    }
 
-        .logo span { color: var(--accent-color); }
+    .container {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 5%;
+    }
 
-        .back-link {
-            color: var(--accent-color);
-            text-decoration: none;
-            font-size: 0.9rem;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            transition: opacity 0.3s;
-        }
+    .gallery-header {
+      margin: 3rem 0 2rem 0;
+      font-family: var(--font-mono);
+    }
 
-        .back-link:hover { opacity: 0.8; }
+    .gallery-header h1 {
+      font-size: 2rem;
+      color: var(--text-bright);
+    }
 
-        /* HEADER SECTION */
-        .gallery-header {
-            padding: 60px 5% 30px;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
+    .gallery-header p {
+      color: var(--accent-cyan);
+      font-size: 0.85rem;
+      letter-spacing: 1.5px;
+    }
 
-        .gallery-tag {
-            color: var(--accent-color);
-            font-size: 0.85rem;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            font-weight: 700;
-        }
+    /* Masonry / Responsive Stills Grid */
+    .stills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 1.5rem;
+    }
 
-        .gallery-title {
-            font-size: clamp(2rem, 5vw, 3.2rem);
-            font-weight: 800;
-            margin: 10px 0;
-        }
+    .still-card {
+      position: relative;
+      background-color: var(--card-bg);
+      border-radius: 4px;
+      overflow: hidden;
+      aspect-ratio: 4 / 5;
+      border: 1px solid rgba(255, 255, 255, 0.05);
+    }
 
-        .gallery-desc {
-            color: var(--text-muted);
-            max-width: 650px;
-            font-size: 1.05rem;
-        }
+    .still-card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0.9;
+      transition: transform 0.4s ease, opacity 0.4s ease;
+    }
 
-        /* PHOTO GRID */
-        .gallery-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 20px;
-            padding: 20px 5% 80px;
-            max-width: 1400px;
-            margin: 0 auto;
-        }
+    .still-card:hover img {
+      opacity: 1;
+      transform: scale(1.04);
+    }
 
-        .photo-item {
-            position: relative;
-            background-color: var(--card-bg);
-            border-radius: 8px;
-            overflow: hidden;
-            border: 1px solid var(--border-color);
-            cursor: pointer;
-            aspect-ratio: 4 / 3; /* Versatile 4:3 frame for urban landscapes */
-        }
-
-        .photo-item img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.4s ease, filter 0.4s ease;
-        }
-
-        .photo-item:hover img {
-            transform: scale(1.04);
-            filter: brightness(1.1);
-        }
-
-        /* LIGHTBOX POPUP */
-        .lightbox {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.92);
-            z-index: 2000;
-            justify-content: center;
-            align-items: center;
-            padding: 20px;
-        }
-
-        .lightbox.active { display: flex; }
-
-        .lightbox img {
-            max-width: 90%;
-            max-height: 85vh;
-            border-radius: 6px;
-            box-shadow: 0 0 30px rgba(0, 229, 255, 0.2);
-        }
-
-        .lightbox-close {
-            position: absolute;
-            top: 25px;
-            right: 30px;
-            color: #fff;
-            font-size: 2.5rem;
-            cursor: pointer;
-            transition: color 0.3s;
-        }
-
-        .lightbox-close:hover { color: var(--accent-color); }
-
-        footer {
-            text-align: center;
-            padding: 30px 5%;
-            border-top: 1px solid var(--border-color);
-            color: var(--text-muted);
-            font-size: 0.85rem;
-        }
-    </style>
+    .loading-text {
+      font-family: var(--font-mono);
+      color: var(--accent-cyan);
+      letter-spacing: 1px;
+    }
+  </style>
 </head>
 <body>
 
-    <!-- NAV -->
-    <nav>
-        <div class="logo">Dean Kelly<span>.</span></div>
-        <a href="index.html#photo" class="back-link">&larr; Back to Portfolio</a>
+  <header>
+    <a href="index.html" class="brand-title">← DEAN KELLY</a>
+    <nav style="font-family: var(--font-mono); font-size: 0.85rem;">
+      <a href="index.html#stills" style="color: var(--accent-cyan);">// STILLS ARCHIVE</a>
     </nav>
+  </header>
 
-    <!-- HEADER -->
+  <main class="container">
     <div class="gallery-header">
-        <span class="gallery-tag">Architecture & Cityscapes</span>
-        <h1 class="gallery-title">Urban Photography</h1>
-        <p class="gallery-desc">Atmospheric street scenes, structural symmetry, neon nightscapes, and geometric perspectives of modern urban environments.</p>
+      <p>// ARCHIVE COLLECTION</p>
+      <h1>LANDSCAPES</h1>
     </div>
 
-    <!-- GALLERY GRID (Replace image URLs with your photography files) -->
-    <div class="gallery-grid">
-        <div class="photo-item"><img src="https://images.unsplash.com/photo-1492691527719-9d1e07e534b4?auto=format&fit=crop&w=1200&q=80" alt="Urban Shot 1"></div>
-        <div class="photo-item"><img src="https://images.unsplash.com/photo-1514565131-fce0801e5785?auto=format&fit=crop&w=1200&q=80" alt="Urban Shot 2"></div>
-        <div class="photo-item"><img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=1200&q=80" alt="Urban Shot 3"></div>
-        <div class="photo-item"><img src="https://images.unsplash.com/photo-1508057198894-247b23fe5ade?auto=format&fit=crop&w=1200&q=80" alt="Urban Shot 4"></div>
-        <div class="photo-item"><img src="https://images.unsplash.com/photo-1477959858617-67f30ac4ce78?auto=format&fit=crop&w=1200&q=80" alt="Urban Shot 5"></div>
-        <div class="photo-item"><img src="https://images.unsplash.com/photo-1513694203232-719a280e022f?auto=format&fit=crop&w=1200&q=80" alt="Urban Shot 6"></div>
-    </div>
+    <!-- Dynamic Image Grid -->
+    <section class="stills-grid" id="gallery-grid">
+      <p class="loading-text" id="loading-state">FETCHING CLOUDINARY MEDIA TRANSMISSIONS...</p>
+    </section>
+  </main>
 
-    <!-- LIGHTBOX MODAL -->
-    <div class="lightbox" id="lightbox">
-        <span class="lightbox-close" id="lightbox-close">&times;</span>
-        <img id="lightbox-img" src="" alt="Enlarged View">
-    </div>
+  <script>
+    const CLOUD_NAME = 'ewjbbwte'; 
+const TAG_NAME = 'urban'; // Tag applied to images in Cloudinary
 
-    <footer>
-        <p>&copy; 2026 Dean Kelly Media. All rights reserved.</p>
-    </footer>
+async function fetchCloudinaryImages() {
+  const grid = document.getElementById('gallery-grid');
+  const loading = document.getElementById('loading-state');
 
-    <!-- INTERACTIVE LIGHTBOX JS -->
-    <script>
-        const lightbox = document.getElementById('lightbox');
-        const lightboxImg = document.getElementById('lightbox-img');
-        const closeBtn = document.getElementById('lightbox-close');
-        const photoItems = document.querySelectorAll('.photo-item img');
+  try {
+    // Fetch image list by tag
+    const response = await fetch(`https://res.cloudinary.com/${CLOUD_NAME}/image/list/${TAG_NAME}.json`);
+    
+    if (!response.ok) {
+      throw new Error(`HTTP error! Status: ${response.status}`);
+    }
 
-        photoItems.forEach(img => {
-            img.addEventListener('click', () => {
-                lightboxImg.src = img.src;
-                lightbox.classList.add('active');
-            });
-        });
+    const data = await response.json();
+    loading.remove();
 
-        closeBtn.addEventListener('click', () => {
-            lightbox.classList.remove('active');
-        });
+    data.resources.forEach(img => {
+      const card = document.createElement('div');
+      card.className = 'still-card';
+      
+      const optimizedSrc = `https://res.cloudinary.com/${CLOUD_NAME}/image/upload/f_auto,q_auto,w_800/v${img.version}/${img.public_id}.${img.format}`;
+      
+      card.innerHTML = `<img src="${optimizedSrc}" alt="Dean Kelly Photography" loading="lazy">`;
+      grid.appendChild(card);
+    });
 
-        lightbox.addEventListener('click', (e) => {
-            if (e.target !== lightboxImg) {
-                lightbox.classList.remove('active');
-            }
-        });
-    </script>
+  } catch (err) {
+    console.error('Cloudinary Fetch Error:', err);
+    loading.innerHTML = `Unable to load gallery. Ensure Resource List access is enabled in Cloudinary Security settings and images are tagged as <code>${TAG_NAME}</code>.`;
+  }
+}
+
+fetchCloudinaryImages();
+  </script>
 </body>
 </html>
