@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Dean Kelly | Automotive Motion</title>
+  <title>Dean Kelly | Graphic Design & Key Art</title>
   
   <!-- Favicon Integration -->
   <link rel="icon" type="image/svg+xml" href="favicon.svg">
@@ -120,54 +120,55 @@
       margin: 2rem 0 3rem 0;
     }
 
-    .gallery-header {
-      margin: 2rem 0 3rem 0;
+    .gallery-header h1 {
+      font-size: clamp(2rem, 4vw, 3rem);
+      color: var(--text-bright);
+      font-weight: 800;
+      letter-spacing: -0.5px;
+      text-transform: uppercase;
+      margin-bottom: 0.5rem;
     }
 
     .gallery-header p {
-      font-family: var(--font-mono);
-      font-size: 0.85rem;
-      color: var(--accent-cyan);
-      letter-spacing: 1.5px;
-      text-transform: uppercase;
-    }
-
-    .gallery-header h1 {
-      font-family: var(--font-mono);
-      font-size: clamp(1.8rem, 4vw, 2.8rem);
-      color: var(--text-bright);
-      font-weight: 700;
-      letter-spacing: 1px;
-      text-transform: uppercase;
-      margin-top: 0.2rem;
+      font-size: 1.1rem;
+      color: var(--text-main);
+      max-width: 700px;
+      font-weight: 300;
     }
 
     /* ==================================================
-       STILLS GALLERY GRID
+       GRAPHICS GALLERY GRID
     ================================================== */
-    .stills-grid {
+    .gallery-grid {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
       gap: 1.5rem;
     }
 
-    .still-card {
+    .gallery-card {
       position: relative;
       background-color: var(--card-bg);
       border: 1px solid rgba(255, 255, 255, 0.05);
       border-radius: 4px;
       overflow: hidden;
       cursor: pointer;
-      aspect-ratio: 4 / 5;
       transition: transform 0.3s ease, border-color 0.3s ease;
     }
 
-    .still-card:hover {
+    .gallery-card:hover {
       transform: translateY(-5px);
       border-color: var(--accent-cyan);
     }
 
-    .still-card img {
+    .gallery-thumb-wrapper {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 4 / 5; /* Great for posters, key art, and artwork */
+      overflow: hidden;
+      background-color: #000;
+    }
+
+    .gallery-thumb {
       width: 100%;
       height: 100%;
       object-fit: cover;
@@ -175,16 +176,29 @@
       transition: transform 0.4s ease, opacity 0.4s ease;
     }
 
-    .still-card:hover img {
+    .gallery-card:hover .gallery-thumb {
       opacity: 1;
       transform: scale(1.04);
     }
 
-    .loading-text {
+    .gallery-card-info {
+      padding: 1rem 1.2rem;
+      background-color: var(--card-bg);
+    }
+
+    .gallery-card-tag {
       font-family: var(--font-mono);
+      font-size: 0.7rem;
       color: var(--accent-cyan);
       letter-spacing: 1px;
-      grid-column: 1 / -1;
+      text-transform: uppercase;
+    }
+
+    .gallery-card-title {
+      font-size: 1.1rem;
+      color: var(--text-bright);
+      font-weight: 600;
+      margin-top: 0.2rem;
     }
 
     /* ==================================================
@@ -243,8 +257,9 @@
       text-transform: uppercase;
     }
 
+    /* Responsive Adjustments */
     @media (max-width: 768px) {
-      .stills-grid {
+      .gallery-grid {
         grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
         gap: 1rem;
       }
@@ -253,7 +268,9 @@
 </head>
 <body>
 
-  <!-- NAVIGATION HEADER -->
+  <!-- ==================================================
+       HEADER / NAVIGATION
+  ================================================== -->
   <header>
     <a href="index.html" class="brand">
       <svg class="brand-logo-svg" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -276,63 +293,174 @@
 
   <main class="container">
 
+    <!-- Return Link -->
     <a href="index.html#stills" class="back-btn">&larr; Return to Main Portfolio</a>
+<style>
+    :root {
+      --bg-color: #0b0c10;
+      --card-bg: #1f2833;
+      --text-main: #c5c6c7;
+      --text-bright: #ffffff;
+      --accent-cyan: #00e5ff;
+      --font-mono: 'Courier New', Courier, monospace;
+      --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    }
 
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background-color: var(--bg-color);
+      color: var(--text-main);
+      font-family: var(--font-sans);
+      padding-bottom: 80px;
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.5rem 5%;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      background-color: rgba(11, 12, 16, 0.95);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      backdrop-filter: blur(8px);
+    }
+
+    .brand-title {
+      font-weight: 700;
+      letter-spacing: 2px;
+      color: var(--text-bright);
+    }
+
+    .container {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 5%;
+    }
+
+    .gallery-header {
+      margin: 3rem 0 2rem 0;
+      font-family: var(--font-mono);
+    }
+
+    .gallery-header h1 {
+      font-size: 2rem;
+      color: var(--text-bright);
+    }
+
+    .gallery-header p {
+      color: var(--accent-cyan);
+      font-size: 0.85rem;
+      letter-spacing: 1.5px;
+    }
+
+    /* Masonry / Responsive Stills Grid */
+    .stills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .still-card {
+      position: relative;
+      background-color: var(--card-bg);
+      border-radius: 4px;
+      overflow: hidden;
+      aspect-ratio: 4 / 5;
+      border: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .still-card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0.9;
+      transition: transform 0.4s ease, opacity 0.4s ease;
+    }
+
+    .still-card:hover img {
+      opacity: 1;
+      transform: scale(1.04);
+    }
+
+    .loading-text {
+      font-family: var(--font-mono);
+      color: var(--accent-cyan);
+      letter-spacing: 1px;
+    }
+  </style>
+</head>
+<body>
+
+
+  <main class="container">
     <div class="gallery-header">
       <p>// ARCHIVE COLLECTION</p>
-      <h1>HIGH-CONTRAST MOTION</h1>
+      <h1>GRAPHIC & KEY ART</h1>
     </div>
 
-    <!-- Dynamic Grid -->
+    <!-- Dynamic Image Grid -->
     <section class="stills-grid" id="gallery-grid">
       <p class="loading-text" id="loading-state">FETCHING CLOUDINARY MEDIA TRANSMISSIONS...</p>
     </section>
-
   </main>
 
-  <!-- LIGHTBOX MODAL OVERLAY -->
+  <script>
+    const CLOUD_NAME = 'ewjbbwte'; 
+const TAG_NAME = 'graphic'; // Tag applied to images in Cloudinary
+
+async function fetchCloudinaryImages() {
+  const grid = document.getElementById('gallery-grid');
+  const loading = document.getElementById('loading-state');
+
+  try {
+    // Fetch image list by tag
+    const response = await fetch(`https://res.cloudinary.com/${CLOUD_NAME}/image/list/${TAG_NAME}.json`);
+    
+    if (!response.ok) {
+      throw new Error(`HTTP error! Status: ${response.status}`);
+    }
+
+    const data = await response.json();
+    loading.remove();
+
+    data.resources.forEach(img => {
+      const card = document.createElement('div');
+      card.className = 'still-card';
+      
+      const optimizedSrc = `https://res.cloudinary.com/${CLOUD_NAME}/image/upload/f_auto,q_auto,w_800/v${img.version}/${img.public_id}.${img.format}`;
+      
+      card.innerHTML = `<img src="${optimizedSrc}" alt="Dean Kelly Photography" loading="lazy">`;
+      grid.appendChild(card);
+    });
+
+  } catch (err) {
+    console.error('Cloudinary Fetch Error:', err);
+    loading.innerHTML = `Unable to load gallery. Ensure Resource List access is enabled in Cloudinary Security settings and images are tagged as <code>${TAG_NAME}</code>.`;
+  }
+}
+
+fetchCloudinaryImages();
+  </script>
+
+    <!-- ==================================================
+         GRAPHICS GRID
+    ================================================== -->
+    
+  </main>
+
+  <!-- ==================================================
+       LIGHTBOX MODAL OVERLAY
+  ================================================== -->
   <div class="lightbox" id="lightbox" onclick="closeLightbox()">
     <span class="lightbox-close">&times;</span>
-    <img class="lightbox-content" id="lightbox-img" src="" alt="Enlarged Visual">
+    <img class="lightbox-content" id="lightbox-img" src="" alt="Enlarged Artwork">
     <div class="lightbox-caption" id="lightbox-caption"></div>
   </div>
 
   <script>
-    const CLOUD_NAME = 'ewjbbwte'; 
-    const TAG_NAME = 'automotive'; // Cloudinary tag for automotive
-
-    async function fetchCloudinaryImages() {
-      const grid = document.getElementById('gallery-grid');
-      const loading = document.getElementById('loading-state');
-
-      try {
-        const response = await fetch(`https://res.cloudinary.com/${CLOUD_NAME}/image/list/${TAG_NAME}.json`);
-        
-        if (!response.ok) {
-          throw new Error(`HTTP error! Status: ${response.status}`);
-        }
-
-        const data = await response.json();
-        loading.remove();
-
-        data.resources.forEach(img => {
-          const card = document.createElement('div');
-          card.className = 'still-card';
-          
-          const optimizedSrc = `https://res.cloudinary.com/${CLOUD_NAME}/image/upload/f_auto,q_auto,w_800/v${img.version}/${img.public_id}.${img.format}`;
-          const fullSrc = `https://res.cloudinary.com/${CLOUD_NAME}/image/upload/f_auto,q_auto/v${img.version}/${img.public_id}.${img.format}`;
-          
-          card.onclick = () => openLightbox(fullSrc, `AUTOMOTIVE // ${img.public_id.toUpperCase()}`);
-          card.innerHTML = `<img src="${optimizedSrc}" alt="Dean Kelly Automotive Photography" loading="lazy">`;
-          grid.appendChild(card);
-        });
-
-      } catch (err) {
-        console.error('Cloudinary Fetch Error:', err);
-        loading.innerHTML = `Unable to load gallery. Ensure Resource List access is enabled in Cloudinary Security settings and images are tagged as <code>${TAG_NAME}</code>.`;
-      }
-    }
-
     function openLightbox(imageSrc, captionText) {
       const lightbox = document.getElementById('lightbox');
       const lightboxImg = document.getElementById('lightbox-img');
@@ -348,13 +476,12 @@
       lightbox.classList.remove('active');
     }
 
+    // Close lightbox when Pressing ESC key
     document.addEventListener('keydown', function(event) {
       if (event.key === "Escape") {
         closeLightbox();
       }
     });
-
-    fetchCloudinaryImages();
   </script>
 
 </body>

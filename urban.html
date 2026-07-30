@@ -3,10 +3,15 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Landscapes | Dean Kelly</title>
+  <title>Dean Kelly | Urban & Architecture</title>
+  
+  <!-- Favicon Integration -->
   <link rel="icon" type="image/svg+xml" href="favicon.svg">
   
   <style>
+    /* ==================================================
+       GLOBAL STYLES & RESET
+    ================================================== */
     :root {
       --bg-color: #0b0c10;
       --card-bg: #1f2833;
@@ -17,15 +22,28 @@
       --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
     }
 
-    * { box-sizing: border-box; margin: 0; padding: 0; }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
 
     body {
       background-color: var(--bg-color);
       color: var(--text-main);
       font-family: var(--font-sans);
+      line-height: 1.6;
       padding-bottom: 80px;
     }
 
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    /* ==================================================
+       NAVIGATION HEADER
+    ================================================== */
     header {
       display: flex;
       justify-content: space-between;
@@ -39,35 +57,90 @@
       backdrop-filter: blur(8px);
     }
 
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .brand-logo-svg {
+      width: 32px;
+      height: 32px;
+    }
+
     .brand-title {
       font-weight: 700;
       letter-spacing: 2px;
       color: var(--text-bright);
+      font-size: 1.1rem;
     }
 
+    nav ul {
+      display: flex;
+      list-style: none;
+      gap: 2rem;
+      font-family: var(--font-mono);
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    nav a:hover {
+      color: var(--accent-cyan);
+      transition: color 0.2s ease;
+    }
+
+    /* ==================================================
+       LAYOUT CONTAINERS & PAGE HEADER
+    ================================================== */
     .container {
       max-width: 1280px;
       margin: 0 auto;
       padding: 0 5%;
     }
 
-    .gallery-header {
-      margin: 3rem 0 2rem 0;
+    .back-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 2rem;
       font-family: var(--font-mono);
+      font-size: 0.85rem;
+      color: var(--accent-cyan);
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      transition: opacity 0.2s ease;
     }
 
-    .gallery-header h1 {
-      font-size: 2rem;
-      color: var(--text-bright);
+    .back-btn:hover {
+      opacity: 0.8;
+    }
+
+    .gallery-header {
+      margin: 2rem 0 3rem 0;
     }
 
     .gallery-header p {
-      color: var(--accent-cyan);
+      font-family: var(--font-mono);
       font-size: 0.85rem;
+      color: var(--accent-cyan);
       letter-spacing: 1.5px;
+      text-transform: uppercase;
     }
 
-    /* Masonry / Responsive Stills Grid */
+    .gallery-header h1 {
+      font-family: var(--font-mono);
+      font-size: clamp(1.8rem, 4vw, 2.8rem);
+      color: var(--text-bright);
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      margin-top: 0.2rem;
+    }
+
+    /* ==================================================
+       STILLS GALLERY GRID
+    ================================================== */
     .stills-grid {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
@@ -77,10 +150,17 @@
     .still-card {
       position: relative;
       background-color: var(--card-bg);
+      border: 1px solid rgba(255, 255, 255, 0.05);
       border-radius: 4px;
       overflow: hidden;
+      cursor: pointer;
       aspect-ratio: 4 / 5;
-      border: 1px solid rgba(255, 255, 255, 0.05);
+      transition: transform 0.3s ease, border-color 0.3s ease;
+    }
+
+    .still-card:hover {
+      transform: translateY(-5px);
+      border-color: var(--accent-cyan);
     }
 
     .still-card img {
@@ -100,66 +180,178 @@
       font-family: var(--font-mono);
       color: var(--accent-cyan);
       letter-spacing: 1px;
+      grid-column: 1 / -1;
+    }
+
+    /* ==================================================
+       LIGHTBOX MODAL
+    ================================================== */
+    .lightbox {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(11, 12, 16, 0.95);
+      backdrop-filter: blur(10px);
+      z-index: 1000;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+    }
+
+    .lightbox.active {
+      display: flex;
+    }
+
+    .lightbox-content {
+      max-width: 90%;
+      max-height: 85vh;
+      border-radius: 4px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.8);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      object-fit: contain;
+    }
+
+    .lightbox-close {
+      position: absolute;
+      top: 25px;
+      right: 30px;
+      font-family: var(--font-mono);
+      font-size: 2rem;
+      color: var(--text-bright);
+      cursor: pointer;
+      transition: color 0.2s ease;
+    }
+
+    .lightbox-close:hover {
+      color: var(--accent-cyan);
+    }
+
+    .lightbox-caption {
+      position: absolute;
+      bottom: 25px;
+      font-family: var(--font-mono);
+      font-size: 0.85rem;
+      color: var(--accent-cyan);
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+    }
+
+    @media (max-width: 768px) {
+      .stills-grid {
+        grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+        gap: 1rem;
+      }
     }
   </style>
 </head>
 <body>
 
+  <!-- NAVIGATION HEADER -->
   <header>
-    <a href="index.html" class="brand-title">← DEAN KELLY</a>
-    <nav style="font-family: var(--font-mono); font-size: 0.85rem;">
-      <a href="index.html#stills" style="color: var(--accent-cyan);">// STILLS ARCHIVE</a>
+    <a href="index.html" class="brand">
+      <svg class="brand-logo-svg" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <polygon points="50,15 82,33 82,67 50,85 18,67 18,33" stroke="rgba(255,255,255,0.25)" stroke-width="2" />
+        <path d="M 18 50 L 82 50" stroke="#00e5ff" stroke-width="3.5" stroke-linecap="round"/>
+        <path d="M 50 15 L 82 67 L 18 67 Z" stroke="#ffffff" stroke-width="3.5" stroke-linejoin="round" fill="none"/>
+        <circle cx="50" cy="50" r="5" fill="#00e5ff" />
+      </svg>
+      <span class="brand-title">DEAN KELLY</span>
+    </a>
+
+    <nav>
+      <ul>
+        <li><a href="index.html#films">Films</a></li>
+        <li><a href="index.html#stills">Archive</a></li>
+        <li><a href="index.html#about">About</a></li>
+      </ul>
     </nav>
   </header>
 
   <main class="container">
+
+    <a href="index.html#stills" class="back-btn">&larr; Return to Main Portfolio</a>
+
     <div class="gallery-header">
       <p>// ARCHIVE COLLECTION</p>
-      <h1>LANDSCAPES</h1>
+      <h1>URBAN ENVIRONMENTS</h1>
     </div>
 
-    <!-- Dynamic Image Grid -->
+    <!-- Dynamic Grid -->
     <section class="stills-grid" id="gallery-grid">
       <p class="loading-text" id="loading-state">FETCHING CLOUDINARY MEDIA TRANSMISSIONS...</p>
     </section>
+
   </main>
+
+  <!-- LIGHTBOX MODAL OVERLAY -->
+  <div class="lightbox" id="lightbox" onclick="closeLightbox()">
+    <span class="lightbox-close">&times;</span>
+    <img class="lightbox-content" id="lightbox-img" src="" alt="Enlarged Visual">
+    <div class="lightbox-caption" id="lightbox-caption"></div>
+  </div>
 
   <script>
     const CLOUD_NAME = 'ewjbbwte'; 
-const TAG_NAME = 'urban'; // Tag applied to images in Cloudinary
+    const TAG_NAME = 'urban'; // Cloudinary tag for urban/architecture
 
-async function fetchCloudinaryImages() {
-  const grid = document.getElementById('gallery-grid');
-  const loading = document.getElementById('loading-state');
+    async function fetchCloudinaryImages() {
+      const grid = document.getElementById('gallery-grid');
+      const loading = document.getElementById('loading-state');
 
-  try {
-    // Fetch image list by tag
-    const response = await fetch(`https://res.cloudinary.com/${CLOUD_NAME}/image/list/${TAG_NAME}.json`);
-    
-    if (!response.ok) {
-      throw new Error(`HTTP error! Status: ${response.status}`);
+      try {
+        const response = await fetch(`https://res.cloudinary.com/${CLOUD_NAME}/image/list/${TAG_NAME}.json`);
+        
+        if (!response.ok) {
+          throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+
+        const data = await response.json();
+        loading.remove();
+
+        data.resources.forEach(img => {
+          const card = document.createElement('div');
+          card.className = 'still-card';
+          
+          const optimizedSrc = `https://res.cloudinary.com/${CLOUD_NAME}/image/upload/f_auto,q_auto,w_800/v${img.version}/${img.public_id}.${img.format}`;
+          const fullSrc = `https://res.cloudinary.com/${CLOUD_NAME}/image/upload/f_auto,q_auto/v${img.version}/${img.public_id}.${img.format}`;
+          
+          card.onclick = () => openLightbox(fullSrc, `URBAN // ${img.public_id.toUpperCase()}`);
+          card.innerHTML = `<img src="${optimizedSrc}" alt="Dean Kelly Urban Photography" loading="lazy">`;
+          grid.appendChild(card);
+        });
+
+      } catch (err) {
+        console.error('Cloudinary Fetch Error:', err);
+        loading.innerHTML = `Unable to load gallery. Ensure Resource List access is enabled in Cloudinary Security settings and images are tagged as <code>${TAG_NAME}</code>.`;
+      }
     }
 
-    const data = await response.json();
-    loading.remove();
+    function openLightbox(imageSrc, captionText) {
+      const lightbox = document.getElementById('lightbox');
+      const lightboxImg = document.getElementById('lightbox-img');
+      const lightboxCaption = document.getElementById('lightbox-caption');
+      
+      lightboxImg.src = imageSrc;
+      lightboxCaption.textContent = captionText;
+      lightbox.classList.add('active');
+    }
 
-    data.resources.forEach(img => {
-      const card = document.createElement('div');
-      card.className = 'still-card';
-      
-      const optimizedSrc = `https://res.cloudinary.com/${CLOUD_NAME}/image/upload/f_auto,q_auto,w_800/v${img.version}/${img.public_id}.${img.format}`;
-      
-      card.innerHTML = `<img src="${optimizedSrc}" alt="Dean Kelly Photography" loading="lazy">`;
-      grid.appendChild(card);
+    function closeLightbox() {
+      const lightbox = document.getElementById('lightbox');
+      lightbox.classList.remove('active');
+    }
+
+    document.addEventListener('keydown', function(event) {
+      if (event.key === "Escape") {
+        closeLightbox();
+      }
     });
 
-  } catch (err) {
-    console.error('Cloudinary Fetch Error:', err);
-    loading.innerHTML = `Unable to load gallery. Ensure Resource List access is enabled in Cloudinary Security settings and images are tagged as <code>${TAG_NAME}</code>.`;
-  }
-}
-
-fetchCloudinaryImages();
+    fetchCloudinaryImages();
   </script>
+
 </body>
 </html>
