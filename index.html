@@ -113,6 +113,13 @@
     .hero-section {
       margin-top: 2rem;
     }
+      
+    .hero-video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
 
     .hero-viewport {
       position: relative;
@@ -519,9 +526,9 @@
 
     <nav>
       <ul>
-        <li><a href="#films">Films</a></li>
-        <li><a href="#stills">Archive</a></li>
-        <li><a href="#about">About</a></li>
+        <li><a href="films.html">Films</a></li>
+        <li><a href="all-photos.html">Photography</a></li>
+        <li><a href="index.html">About</a></li>
       </ul>
     </nav>
   </header>
@@ -545,13 +552,15 @@
         </div>
 
         <!-- Featured Widescreen Video Loop -->
-        <iframe 
-          src="https://www.youtube.com/embed/VibBP5boDm4?autoplay=1&mute=1&loop=1&playlist=VibBP5boDm4&controls=0&showinfo=0&rel=0&modestbranding=1" 
-          title="Get 'Em Featured Cut" 
-          frameborder="0" 
-          allow="autoplay; encrypted-media" 
-          allowfullscreen>
-        </iframe>
+        <video
+            autoplay
+            muted
+            loop
+            playsinline
+            preload="auto"
+            class="hero-video">
+  <source src="videos/film-02.mp4" type="video/mp4">
+</video>
 
       </div>
 
@@ -572,7 +581,7 @@
     <section class="video-grid">
       
       <!-- Film Project 1: Dublin on Drugs -->
-      <a href="https://youtu.be/oisGEmk1NdY" target="_blank" rel="noopener noreferrer" class="video-card">
+      <a href="film-01.html" class="video-card">
         <div class="video-thumb-wrapper">
           <img src="https://img.youtube.com/vi/oisGEmk1NdY/hqdefault.jpg" alt="Dublin on Drugs" class="video-thumb">
           <div class="play-badge"></div>
@@ -587,7 +596,7 @@
       </a>
 
       <!-- Film Project 2: Get 'Em -->
-      <a href="https://youtu.be/VibBP5boDm4" target="_blank" rel="noopener noreferrer" class="video-card">
+      <a href="film-02.html" class="video-card">
         <div class="video-thumb-wrapper">
           <img src="https://img.youtube.com/vi/VibBP5boDm4/hqdefault.jpg" alt="Get'em - A Student Short Film" class="video-thumb">
           <div class="play-badge"></div>
@@ -602,7 +611,7 @@
       </a>
 
       <!-- Film Project 3: One Punch at a Time -->
-      <a href="https://youtu.be/Frikb4dNiHI" target="_blank" rel="noopener noreferrer" class="video-card">
+      <a href="film-03.html" class="video-card">
         <div class="video-thumb-wrapper">
           <img src="https://img.youtube.com/vi/Frikb4dNiHI/hqdefault.jpg" alt="One Punch at a Time - A Student Documentary" class="video-thumb">
           <div class="play-badge"></div>
@@ -615,8 +624,46 @@
           <h3 class="video-title">One Punch at a Time</h3>
         </div>
       </a>
+        
+        </section>
+        <div class="films-more">
+    <a href="films.html" class="see-more">
+        SEE MORE
+        <span aria-hidden="true">→</span>
+    </a>
+</div>
+    <style>
+        
+    .films-more {
+  display: flex;
+  justify-content: center;
+  margin: 2rem 0 4rem;
+}
 
-    </section>
+.see-more {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 24px;
+  color: var(--accent-cyan);
+  border: 1px solid var(--accent-cyan);
+  border-radius: 4px;
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  letter-spacing: 1.5px;
+  transition: background-color 0.25s ease,
+              color 0.25s ease,
+              transform 0.25s ease;
+}
+
+.see-more:hover {
+  background: var(--accent-cyan);
+  color: var(--bg-color);
+  transform: translateY(-2px);
+}
+    </style>
+
+    
 
     <!-- ==================================================
          SECTION 3: ARCHIVE STILLS, PORTRAITS & DESIGN
@@ -664,6 +711,13 @@
       </a>
 
     </section>
+      <div class="films-more">
+    <a href="all-photos.html" class="see-more">
+        SEE MORE
+        <span aria-hidden="true">→</span>
+    </a>
+</div>
+    
 
     <!-- ==================================================
          SECTION 4: ABOUT ME & CONTACT (FORMSPREE INTEGRATION)

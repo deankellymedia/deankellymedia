@@ -1,0 +1,503 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dean Kelly | Film Portfolio</title>
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+
+  <style>
+    :root {
+      --bg-color: #0b0c10;
+      --card-bg: #1f2833;
+      --text-main: #c5c6c7;
+      --text-bright: #fff;
+      --accent-cyan: #00e5ff;
+      --font-mono: 'Courier New', Courier, monospace;
+      --font-sans: -apple-system, BlinkMacSystemFont,
+        "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: var(--bg-color);
+      color: var(--text-main);
+      font-family: var(--font-sans);
+      line-height: 1.6;
+      padding-bottom: 80px;
+    }
+
+    a { color: inherit; text-decoration: none; }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.5rem 5%;
+      border-bottom: 1px solid rgba(255,255,255,.08);
+      background: rgba(11,12,16,.95);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      backdrop-filter: blur(8px);
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .brand-logo-svg { width: 32px; height: 32px; }
+
+    .brand-title {
+      font-weight: 700;
+      letter-spacing: 2px;
+      color: var(--text-bright);
+      font-size: 1.1rem;
+    }
+
+    nav ul {
+      display: flex;
+      list-style: none;
+      gap: 2rem;
+      font-family: var(--font-mono);
+      font-size: .85rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    nav a:hover, nav a.active { color: var(--accent-cyan); }
+
+    .container {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 5%;
+    }
+
+    .back-btn {
+      display: inline-block;
+      margin-top: 2rem;
+      color: var(--accent-cyan);
+      font: .85rem var(--font-mono);
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+    }
+
+    .gallery-header { margin: 2rem 0 3rem; }
+
+    .gallery-header p {
+      color: var(--accent-cyan);
+      font: .85rem var(--font-mono);
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+    }
+
+    .gallery-header h1 {
+      color: var(--text-bright);
+      font: 700 clamp(1.8rem, 4vw, 2.8rem)
+        var(--font-mono);
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+
+    .gallery-header .intro {
+      color: var(--text-main);
+      font: .95rem var(--font-sans);
+      letter-spacing: 0;
+      text-transform: none;
+      margin-top: .8rem;
+      max-width: 650px;
+    }
+
+    .film-grid {
+      display: grid;
+      grid-template-columns:
+        repeat(auto-fit, minmax(min(100%, 360px), 1fr));
+      gap: 2rem 1.5rem;
+    }
+
+    .film-card {
+      display: block;
+      overflow: hidden;
+      background: var(--card-bg);
+      border: 1px solid rgba(255,255,255,.05);
+      border-radius: 4px;
+      transition: transform .3s ease,
+                  border-color .3s ease;
+    }
+
+    .film-card:hover {
+      transform: translateY(-5px);
+      border-color: var(--accent-cyan);
+    }
+
+    .film-thumb {
+      position: relative;
+      aspect-ratio: 16 / 9;
+      overflow: hidden;
+      background: #000;
+    }
+
+    .film-thumb img {
+      width: 100%;
+      height: 100%;
+      display: block;
+      object-fit: cover;
+      opacity: .9;
+      transition: transform .4s ease, opacity .4s ease;
+    }
+
+    .film-card:hover img {
+      opacity: 1;
+      transform: scale(1.04);
+    }
+
+    .play-badge {
+      position: absolute;
+      inset: 50% auto auto 50%;
+      transform: translate(-50%, -50%);
+      width: 48px;
+      height: 48px;
+      border: 1px solid var(--accent-cyan);
+      border-radius: 50%;
+      background: rgba(11,12,16,.8);
+      display: grid;
+      place-items: center;
+    }
+
+    .play-badge::after {
+      content: "";
+      margin-left: 4px;
+      border-style: solid;
+      border-width: 7px 0 7px 11px;
+      border-color: transparent transparent transparent
+        var(--accent-cyan);
+    }
+
+    .film-info { padding: 1.2rem; }
+
+    .film-tags {
+      display: flex;
+      justify-content: space-between;
+      gap: 1rem;
+      color: var(--accent-cyan);
+      font: .72rem var(--font-mono);
+      margin-bottom: .4rem;
+    }
+
+    .film-title {
+      color: var(--text-bright);
+      font-size: 1.25rem;
+      font-weight: 600;
+    }
+
+    .site-footer {
+      max-width: 1280px;
+      margin: 5rem auto 0;
+      padding: 1.5rem 5%;
+      border-top: 1px solid rgba(255,255,255,.08);
+      font: .75rem var(--font-mono);
+    }
+
+    @media (max-width: 600px) {
+      header { padding: 1rem 5%; }
+      nav ul { gap: .8rem; font-size: .7rem; }
+      .brand-title { font-size: .9rem; }
+      .film-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+
+<style>
+ /* ==================================================
+       GLOBAL STYLES & RESET
+    ================================================== */
+    :root {
+      --bg-color: #0b0c10;
+      --card-bg: #1f2833;
+      --text-main: #c5c6c7;
+      --text-bright: #ffffff;
+      --accent-cyan: #00e5ff;
+      --font-mono: 'Courier New', Courier, monospace;
+      --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--bg-color);
+      color: var(--text-main);
+      font-family: var(--font-sans);
+      line-height: 1.6;
+      padding-bottom: 80px;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    /* ==================================================
+       NAVIGATION HEADER
+    ================================================== */
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.5rem 5%;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      background-color: rgba(11, 12, 16, 0.95);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      backdrop-filter: blur(8px);
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .brand-logo-svg {
+      width: 32px;
+      height: 32px;
+    }
+
+    .brand-title {
+      font-weight: 700;
+      letter-spacing: 2px;
+      color: var(--text-bright);
+      font-size: 1.1rem;
+    }
+
+    nav ul {
+      display: flex;
+      list-style: none;
+      gap: 2rem;
+      font-family: var(--font-mono);
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    nav a:hover {
+      color: var(--accent-cyan);
+      transition: color 0.2s ease;
+    }
+
+    /* ==================================================
+       LAYOUT CONTAINERS & PAGE HEADER
+    ================================================== */
+    .container {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 5%;
+    }
+
+    .back-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 2rem;
+      font-family: var(--font-mono);
+      font-size: 0.85rem;
+      color: var(--accent-cyan);
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      transition: opacity 0.2s ease;
+    }
+
+    .back-btn:hover {
+      opacity: 0.8;
+    }
+
+    .gallery-header {
+      margin: 2rem 0 3rem 0;
+    }
+
+    .gallery-header {
+      margin: 2rem 0 3rem 0;
+    }
+
+    .gallery-header h1 {
+      font-family: var(--font-mono);
+      font-size: clamp(1.8rem, 4vw, 2.8rem);
+      color: var(--text-bright);
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      margin-top: 0.2rem;
+    }
+      
+    .gallery-header p {
+      font-family: var(--font-mono);
+      font-size: 0.85rem;
+      color: var(--accent-cyan);
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+    }
+</style>
+
+<body>
+<!-- NAVIGATION HEADER -->
+  <header>
+    <a href="#" class="brand">
+      <!-- Anamorphic Prism Logo -->
+      <svg class="brand-logo-svg" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <polygon points="50,15 82,33 82,67 50,85 18,67 18,33" stroke="rgba(255,255,255,0.25)" stroke-width="2" />
+        <path d="M 18 50 L 82 50" stroke="#00e5ff" stroke-width="3.5" stroke-linecap="round"/>
+        <path d="M 50 15 L 82 67 L 18 67 Z" stroke="#ffffff" stroke-width="3.5" stroke-linejoin="round" fill="none"/>
+        <circle cx="50" cy="50" r="5" fill="#00e5ff" />
+      </svg>
+      <span class="brand-title">DEAN KELLY</span>
+    </a>
+
+    <nav>
+      <ul>
+        <li><a href="films.html">Films</a></li>
+        <li><a href="all-photos.html">Photography</a></li>
+        <li><a href="index.html#about">About</a></li>
+      </ul>
+    </nav>
+  </header>
+
+<main class="container">
+  <a href="index.html#films" class="back-btn">
+    &larr; Return to Main Portfolio
+  </a>
+
+  <div class="gallery-header">
+    <p>// SELECTED DIRECTORIAL WORK</p>
+    <h1>FILM PORTFOLIO</h1>
+    <p class="intro">
+      A collection of films, documentaries and visual projects.
+    </p>
+  </div>
+
+  <section class="film-grid">
+
+    <a href="film-01.html" class="film-card">
+      <div class="film-thumb">
+        <img src="images/films/film-01.jpg"
+             alt="Dublin on Drugs film thumbnail"
+             loading="lazy">
+        <span class="play-badge"></span>
+      </div>
+      <div class="film-info">
+        <div class="film-tags">
+          <span>DOCUMENTARY</span>
+          <span>[01]</span>
+        </div>
+        <h2 class="film-title">Dublin on Drugs</h2>
+      </div>
+    </a>
+
+    <a href="film-02.html" class="film-card">
+      <div class="film-thumb">
+        <img src="images/films/film-02.jpg"
+             alt="Get 'Em film thumbnail"
+             loading="lazy">
+        <span class="play-badge"></span>
+      </div>
+      <div class="film-info">
+        <div class="film-tags">
+          <span>SHORT FILM</span><span>[02]</span>
+        </div>
+        <h2 class="film-title">Get 'Em</h2>
+      </div>
+    </a>
+
+    <a href="film-03.html" class="film-card">
+      <div class="film-thumb">
+        <img src="images/films/film-03.jpg"
+             alt="One Punch at a Time film thumbnail"
+             loading="lazy">
+        <span class="play-badge"></span>
+      </div>
+      <div class="film-info">
+        <div class="film-tags">
+          <span>SHORT CINEMATIC</span><span>[03]</span>
+        </div>
+        <h2 class="film-title">Dream big. Work hard.</h2>
+      </div>
+    </a>
+
+    <!-- Duplicate this card pattern for projects 04–08.
+         Replace each title, image, category and page link. -->
+
+    <a href="film-04.html" class="film-card">
+      <div class="film-thumb">
+        <img src="images/films/film-04.jpg"
+             alt="Film four thumbnail" loading="lazy">
+        <span class="play-badge"></span>
+      </div>
+      <div class="film-info">
+        <div class="film-tags"><span>INTERVIEW</span><span>[04]</span></div>
+        <h2 class="film-title">Bray Endeavour Awards - Lifetime Achievement Award</h2>
+      </div>
+    </a>
+
+    <a href="film-05.html" class="film-card">
+      <div class="film-thumb">
+        <img src="images/films/film-05.jpg"
+             alt="Film five thumbnail" loading="lazy">
+        <span class="play-badge"></span>
+      </div>
+      <div class="film-info">
+        <div class="film-tags"><span>INTERVIEW</span><span>[05]</span></div>
+        <h2 class="film-title">Bray Endeavour Awards - Person of the Year Award</h2>
+      </div>
+    </a>
+
+    <a href="film-06.html" class="film-card">
+      <div class="film-thumb">
+        <img src="images/films/film-06.jpg"
+             alt="Film six thumbnail" loading="lazy">
+        <span class="play-badge"></span>
+      </div>
+      <div class="film-info">
+        <div class="film-tags"><span>INTERVIEW</span><span>[06]</span></div>
+        <h2 class="film-title">Bray Endeavour Awards - Community Award</h2>
+      </div>
+    </a>
+
+    <a href="film-07.html" class="film-card">
+      <div class="film-thumb">
+        <img src="images/films/film-07.jpg"
+             alt="Film seven thumbnail" loading="lazy">
+        <span class="play-badge"></span>
+      </div>
+      <div class="film-info">
+        <div class="film-tags"><span>SHORT CINEMATIC</span><span>[07]</span></div>
+        <h2 class="film-title">Drift Games Bash 25'</h2>
+      </div>
+    </a>
+
+    <a href="film-08.html" class="film-card">
+      <div class="film-thumb">
+        <img src="images/films/film-08.jpg"
+             alt="Film eight thumbnail" loading="lazy">
+        <span class="play-badge"></span>
+      </div>
+      <div class="film-info">
+        <div class="film-tags"><span>DOCUMENTARY</span><span>[08]</span></div>
+        <h2 class="film-title">One Punch at a Time</h2>
+      </div>
+    </a>
+
+  </section>
+</main>
+
+<footer class="site-footer">
+  DEAN KELLY MEDIA // FILM ARCHIVE
+</footer>
+</body>
+</html>
