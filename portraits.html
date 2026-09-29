@@ -359,9 +359,17 @@
   </script>
 
 </body>
-<footer class="site-footer">
-  <p>© 2026 Dean Kelly. All rights reserved.</p>
+<footer class="site-footer2">
+  <a class="footertext" href="privacy.html">Privacy Policy</a>
+  <br>
+  <a class="footertext" href="cookies.html">Cookies Policy</a>
+  <br>
+  <a class="footertext" href="terms.html">Terms & Conditions</a>
 </footer>
+<footer>
+    <p class="site-footer">© 2026 Dean Kelly. All rights reserved.</p>
+    </footer>
+    
 <style>
     .site-footer {
       max-width: 1280px;
@@ -369,6 +377,23 @@
       padding: 1.5rem 5%;
       border-top: 1px solid rgba(255,255,255,.08);
       font: .75rem var(--font-mono);
+      text-align: center;
     }
-</style>
+    
+    .site-footer2 {
+      max-width: 1280px;
+      margin: 5rem auto 0;
+      padding: 1.5rem 5%;
+      border-top: 1px solid rgba(255,255,255,.08);
+    }
+    
+    .footertext {
+      font: .75rem var(--font-mono);
+      text-align: left;
+    }
+    
+    .footertext:hover {
+      color: var(--accent-cyan);
+      transition: color 0.2s ease;
+    }
 </html>
